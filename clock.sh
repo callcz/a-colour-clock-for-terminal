@@ -9,6 +9,7 @@ echo "	Usage : $0 [ -t || -w || {[0..9],:} ] x-asix y-asix
 	-t	Print once clock and exit .
 	-w	A while loop to print clock .
 	{[0..9],:}	print Incude [0..9] and \":\" .
+	--help or -h List this help .
 	"
 exit
 fi
