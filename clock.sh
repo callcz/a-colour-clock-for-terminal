@@ -13,15 +13,19 @@ echo "	Usage : $0 [ -t || -w || {[0..9],:} ] x-asix y-asix
 	"
 exit
 fi
-
+#START config
+logo_degtal_turn=1
+hiden_mouse=1
+clean_screen=1
+#END config
+if [[ $clean_screen == 1 ]];then echo -e '\033c';fi
+if [[ $hiden_mouse == 1 ]];then echo -ne '\033[?25l';trap "echo -ne '\033[?25h';exit" 2;fi
 ##background
-echo -e '\033c'
 degtal=$1
 #logo_background=□
 logo_background=' '
 #logo_degtal=■
 logo_degtal='#'
-logo_degtal_turn=1
 background_x_max=5
 background_y_max=9
 start_x=0
