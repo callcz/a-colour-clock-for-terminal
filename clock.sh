@@ -199,7 +199,7 @@ then
 		then
 			word_w=_colon
 		fi
-		start_x=$start_x+6
+		start_x=$((start_x+6))
 		output_l $word_w $start_x $start_y
 		echo -en "\n"
 	done
