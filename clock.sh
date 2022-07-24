@@ -19,7 +19,7 @@ echo "	Usage : $0 [ -t || -w || \"{WORDS}\" ] x-asix y-asix
 	-t	Print once clock and exit .
 	-w	A while loop to print clock .
 	'{WORDS}'	Print some words , they incude {[A..Z],[0..9],:,+,-,!,?,.,,,:,;,\",',@} , 
-			Use \`echo -e \"\/r\"\` to Create a new line :
+			Use \`echo -e \"\\r\"\` to Create a new line :
 			example :	$0 'VTEC IS BEST!'
 			example :	$0 '\"ARE YOU OK ?\" , I SAY: '\\\"'I AM OK'\"!\"\\\"
 			example :	$0 HONDA\"\`echo -e \"\\r\"\`\"'VTEC IS BEST!'
