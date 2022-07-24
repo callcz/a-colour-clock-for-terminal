@@ -31,7 +31,7 @@ fi
 ##Globa value
 echo -e '\033c'
 if [[ $clean_screen == 1 ]];then echo -e '\033c';fi
-if [[ $hiden_mouse == 1 ]];then echo -ne '\033[?25l'trap "my_exit_l" 2;fi
+if [[ $hiden_mouse == 1 ]];then echo -ne '\033[?25l';trap "my_exit_l" 2;fi
 degtal=$1
 background_x_max=5
 background_y_max=9
