@@ -213,9 +213,6 @@ Time_l(){
 	done
 	if [[ ${d} != `date +%T` ]]
 	then
-		tty_xy=(`stty size`)
-		tty_x=${tty_xy[1]}
-		tty_y=${tty_xy[0]}
 		start_x=$1
 		bank=$((start_x-6))
 		start_y=$2
@@ -276,6 +273,9 @@ elif [[ $1 == '-w' ]]
 then
 	while :
 	do
+		tty_xy=(`stty size`)
+		tty_x=${tty_xy[1]}
+		tty_y=${tty_xy[0]}
 		Time_l $start_x $start_y
 	done
 	my_exit_l
@@ -287,9 +287,6 @@ then
 		tty_x=${tty_xy[1]}
 		tty_y=${tty_xy[0]}
 	done
-	tty_xy=(`stty size`)
-	tty_x=${tty_xy[1]}
-	tty_y=${tty_xy[0]}
 	bank=$((start_x-background_x_max-1))
 	start_xb=$bank
 	start_yb=$start_y
