@@ -15,16 +15,16 @@ logo_background=' '
 if [[ $1 == --help || $1 == -h ]]
 then
 	head -n4 $0
-echo "	Usage : $0 [ -t || -w || \"{WORDS}\" ] x-asix y-asix
-	-t	Print once clock and exit .
-	-w	A while loop to print clock .
-	'{WORDS}'	Print some words , they incude {[A..Z],[0..9],:,+,-,!,?,.,,,:,;,\",',@} , 
-			Use \`echo -e \"\\r\"\` to Create a new line :
-			example :	$0 'VTEC IS BEST!'
-			example :	$0 '\"ARE YOU OK ?\" , I SAY: '\\\"'I AM OK'\"!\"\\\"
-			example :	$0 HONDA\"\`echo -e \"\\r\"\`\"'VTEC IS BEST!'
-	--help or -h	List this help .
-	"
+echo "  Usage : $0 [ -t || -w || -r || \"{WORDS}\" ] [ x-asix ] [y-asix ]
+  -t	Print a clock once .
+  -w	A while loop clock .
+  -r	Get words to be print over the read program .
+  '{WORDS}'	Print words , incude {[A-Z],[0-9],:,+,-,!,?,.,,,:,;,\",',@} , Use \`echo -e \"\\r\"\` to Create a new line .
+  	example : $0 'VTEC IS BEST!'
+  	example : $0 '\"ARE YOU OK ?\" , I SAY: '\\\"'I AM OK'\"!\"\\\"
+  	example : $0 HONDA\"\`echo -e \"\\r\"\`\"'VTEC IS BEST!'
+  --help or -h	List this help .
+  "
 exit
 fi
 
@@ -194,7 +194,6 @@ r_space=()
 r_plus=(5 N O)
 r_minus=(5)
 r_exclamatory=(T A N K O F X)
-
 r_period=(X)
 r_semicolon=(O W X)
 r_comma=(W X)
@@ -240,7 +239,6 @@ Time_l(){
 		fi
 		bank=$((bank+background_x_max+1))
 		output_l $T $bank $start_y
-#		echo $bank
 	done
 	echo -e "\033[$((background_y_max+start_y+2));$((${start_x}+3))H\033[37m`date +%Y/%m/%d'    '%A`\n\033[0m"
 	fi
@@ -275,13 +273,24 @@ then
 	bank=$((start_x-background_x_max-1))
 	start_xb=$bank
 	start_yb=$start_y
-	word=$1
+	if [[ $1 == '-r' ]]
+	then
+		echo -e '\033c'&&read -p 'Write something :' word
+		if [[ ! $word || -z $word ]]
+		then
+			echo 'Word empty nothing to do .'
+			my_exit_l
+		fi
+		typeset -u word=$word
+	else
+		typeset -u word=$1
+	fi
 	for ((l=0;l<${#word};l++))
 	do
 		word_w=${word:$l:1}
 		if [[ $logo_degtal_turn -eq 1 ]]
-			then
-				logo_degtal=$word_w
+		then
+			logo_degtal=$word_w
 		fi
 #Special character interpretation
 		if [[ $word_w == ':' ]]
@@ -295,6 +304,8 @@ then
 			if [[ $(($((bank+$((background_x_max+1))*2))+$(($((background_x_max+1))*${#word_part})))) -gt $tty_x ]]
 			then
 				newbank=1
+#				echo np=$newbank
+#				sleep 5
 			fi
 		elif [[ $word_w == '+' ]]
 		then
@@ -340,7 +351,10 @@ then
 			then
 				word_w=null
 			fi
+			newbank=0
 			echo -ne "\n"
+#			echo nl=$newline
+#			sleep 5
 		fi
 		if [[ $((start_y+background_y_max+1)) -gt $tty_y ]]
 		then
