@@ -30,17 +30,19 @@ fi
 
 ##Globa value
 echo -e '\033c'
-if [[ $clean_screen == 1 ]];then echo -e '\033c';fi
-if [[ $hiden_mouse == 1 ]];then echo -ne '\033[?25l';trap "my_exit_l" 2;fi
 degtal=$1
 background_x_max=5
 background_y_max=9
 start_x=0
 start_y=0
+setTimeWrap=0
 tty_xy=(`stty size`)
 tty_x=${tty_xy[1]}
 tty_y=${tty_xy[0]}
-
+#if [[ $tty_x -eq 0 ]];then tty_x=96;fi
+#if [[ $tty_y -eq 0 ]];then tty_y=24;fi
+if [[ $clean_screen == 1 ]];then echo -e '\033c';fi
+if [[ $hiden_mouse == 1 ]];then echo -ne '\033[?25l';trap "my_exit_l" 2;fi
 ##my_exit_l
 my_exit_l(){
 	echo -ne '\033[?25h';exit
@@ -224,12 +226,12 @@ Time_l(){
 		then
 			T=_colon
 		fi
-		if [[ $((bank+$((background_x_max+1))*2)) -gt $tty_x ]]
+		if [[ $((bank+$((background_x_max+1))*2)) -gt $tty_x && $setTimeWrap -eq 1 ]]
 		then
 			bank=$start_xb
 			start_y=$((start_y+background_y_max+1))
 		fi
-		if [[ $((start_y+background_y_max+1)) -gt $tty_y ]]
+		if [[ $((start_y+background_y_max+1)) -gt $tty_y && $setTimeWrap -eq 1 ]]
 		then
 			for ((f=0;f<$tty_y;f++))
 			do
