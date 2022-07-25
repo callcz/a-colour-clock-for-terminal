@@ -2,7 +2,7 @@
 ##
 ## This a LED like clock shell scrip.
 ## Writen by callcz 20220722
-  Usage : ./clock.sh [ -t || -w || -r || "{WORDS}" ] [ x-asix ] [y-asix ]
+  Usage : ./clock.sh [ -t || -w || -r || "{WORDS}" ] [ x-asix ] [ y-asix ]
   -t    Print a clock once .
   -w    A while loop clock .
   -r    Get words to be print over the read program .
