@@ -9,6 +9,7 @@ logo_degtal='#'
 hiden_mouse=1
 clean_screen=1
 logo_background=' '
+setTimeWrap=1
 #END config
 
 #Help list
@@ -35,7 +36,6 @@ background_x_max=5
 background_y_max=9
 start_x=0
 start_y=0
-setTimeWrap=0
 tty_xy=(`stty size`)
 tty_x=${tty_xy[1]}
 tty_y=${tty_xy[0]}
@@ -205,8 +205,17 @@ r_d_quotation=(T A)
 r_s_quotation=(8 L 9 U)
 
 Time_l(){
+	while [[ ${tty_xy[@]} == '0 0' ]]
+	do
+		tty_xy=(`stty size`)
+		tty_x=${tty_xy[1]}
+		tty_y=${tty_xy[0]}
+	done
 	if [[ ${d} != `date +%T` ]]
 	then
+		tty_xy=(`stty size`)
+		tty_x=${tty_xy[1]}
+		tty_y=${tty_xy[0]}
 		start_x=$1
 		bank=$((start_x-6))
 		start_y=$2
@@ -272,6 +281,15 @@ then
 	my_exit_l
 elif [[ $1 ]]
 then
+	while [[ ${tty_xy[@]} == '0 0' ]]
+	do
+		tty_xy=(`stty size`)
+		tty_x=${tty_xy[1]}
+		tty_y=${tty_xy[0]}
+	done
+	tty_xy=(`stty size`)
+	tty_x=${tty_xy[1]}
+	tty_y=${tty_xy[0]}
 	bank=$((start_x-background_x_max-1))
 	start_xb=$bank
 	start_yb=$start_y
