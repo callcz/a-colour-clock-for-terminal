@@ -361,4 +361,23 @@ then
 			done
 			start_y=0
 		fi
-		if [[ $word_w != nu
+		if [[ $word_w != null ]]
+		then
+			bank=$((bank+background_x_max+1))
+		fi
+		output_l $word_w $bank $start_y
+		if [[ $newbank -eq 1 ]]
+		then
+			newline=1
+			newbank=0
+		else
+			newline=0
+		fi
+	done
+	echo -e "\n"
+	my_exit_l
+else
+	Time_l $start_x $start_y
+fi
+
+my_exit_l
