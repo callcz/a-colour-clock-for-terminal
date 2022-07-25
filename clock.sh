@@ -15,7 +15,7 @@ logo_background=' '
 if [[ $1 == --help || $1 == -h ]]
 then
 	head -n4 $0
-echo "  Usage : $0 [ -t || -w || -r || \"{WORDS}\" ] [ x-asix ] [y-asix ]
+echo "  Usage : $0 [ -t || -w || -r || \"{WORDS}\" ] [ x-asix ] [ y-asix ]
   -t	Print a clock once .
   -w	A while loop clock .
   -r	Get words to be print over the read program .
