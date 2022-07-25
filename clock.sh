@@ -275,7 +275,8 @@ then
 	start_yb=$start_y
 	if [[ $1 == '-r' ]]
 	then
-		echo -e '\033c'&&read -p 'Write something :' word
+		read -p 'Write something :' word
+		echo -ne '\033c'
 		if [[ ! $word || -z $word ]]
 		then
 			echo 'Word empty nothing to do .'
@@ -304,8 +305,6 @@ then
 			if [[ $(($((bank+$((background_x_max+1))*2))+$(($((background_x_max+1))*${#word_part})))) -gt $tty_x ]]
 			then
 				newbank=1
-#				echo np=$newbank
-#				sleep 5
 			fi
 		elif [[ $word_w == '+' ]]
 		then
@@ -353,8 +352,6 @@ then
 			fi
 			newbank=0
 			echo -ne "\n"
-#			echo nl=$newline
-#			sleep 5
 		fi
 		if [[ $((start_y+background_y_max+1)) -gt $tty_y ]]
 		then
@@ -364,23 +361,4 @@ then
 			done
 			start_y=0
 		fi
-		if [[ $word_w != null ]]
-		then
-			bank=$((bank+background_x_max+1))
-		fi
-		output_l $word_w $bank $start_y
-		if [[ $newbank -eq 1 ]]
-		then
-			newline=1
-			newbank=0
-		else
-			newline=0
-		fi
-	done
-	echo -e "\n"
-	my_exit_l
-else
-	Time_l $start_x $start_y
-fi
-
-my_exit_l
+		if [[ $word_w != nu
